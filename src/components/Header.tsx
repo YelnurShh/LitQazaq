@@ -65,7 +65,7 @@ export default function Header() {
 
       {/* 📱 Мобиль мәзір */}
       {menuOpen && (
-        <nav className="md:hidden flex flex-col items-center bg-blue-700 py-4 space-y-3 text-base">
+        <nav className="md:hidden flex flex-col items-center bg-gradient-to-br from-rose-500 to-orange-400 py-4 space-y-3 text-base">
           <Link href="/" className="hover:underline" onClick={() => setMenuOpen(false)}>
             Басты бет
           </Link>
