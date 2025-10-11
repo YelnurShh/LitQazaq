@@ -17,7 +17,7 @@ export const topicsData: Record<
     title: "Абай Құнанбайұлы",
     description:
       "Абай Құнанбайұлы — қазақтың ұлы ақыны, философы және ағартушысы. Оның шығармалары қазақ әдебиетінің жаңа кезеңін бастады.",
-    video: "https://www.youtube.com/embed/p8A9PZyL3aw",
+    video: "https://www.youtube.com/embed/WuH0YJguPiw",
     questions: [
       {
         q: "Абай Құнанбайұлы қай жылы туған?",
@@ -55,7 +55,7 @@ export const topicsData: Record<
     title: "Жамбыл Жабаев",
     description:
       "Жамбыл Жабаев — қазақтың халық ақыны, жырау, айтыс өнерінің шебері. Оның шығармалары халықтың ерлігі мен рухын жырлайды.",
-    video: "https://www.youtube.com/embed/xMuZ1gR5R8w",
+    video: "https://www.youtube.com/embed/aK6-KixPlGI",
     questions: [
       {
         q: "Жамбыл Жабаев қай жылы туған?",
@@ -89,7 +89,7 @@ export const topicsData: Record<
     title: "Мұқағали Мақатаев",
     description:
       "Мұқағали Мақатаев — қазақтың сыршыл лирик ақыны, махаббат пен өмірдің мағынасын жырлаған ерекше тұлға.",
-    video: "https://www.youtube.com/embed/N1kVoL2XWNo",
+    video: "https://www.youtube.com/embed/_meRFx0TaQs",
     questions: [
       {
         q: "Мұқағали Мақатаев қай жылы туған?",
@@ -123,7 +123,7 @@ export const topicsData: Record<
     title: "XX ғасыр қазақ әдебиеті",
     description:
       "XX ғасыр қазақ әдебиеті ұлттың рухани жаңғыруы мен тарихи оқиғаларға толы кезеңді бейнеледі. Бұл дәуірде жаңа әдеби бағыттар қалыптасты.",
-    video: "https://www.youtube.com/embed/tm2wPbHav5k",
+    video: "https://www.youtube.com/embed/5MVZY_-NxQk",
     questions: [
       {
         q: "XX ғасыр әдебиетінде қандай бағыттар дамыды?",
@@ -157,7 +157,7 @@ export const topicsData: Record<
     title: "Қазіргі заман әдебиеті",
     description:
       "Қазіргі қазақ әдебиеті — жаңа көзқарас пен заманауи тақырыптарды қамтитын әдеби бағыт. Жастар шығармашылығы мен цифрлық әдебиет дамып келеді.",
-    video: "https://www.youtube.com/embed/o0d5gOGyktM",
+    video: "https://www.youtube.com/embed/DjO6xdFZwzg",
     questions: [
       {
         q: "Қазіргі қазақ әдебиетінде қандай тақырыптар көтеріледі?",
