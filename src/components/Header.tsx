@@ -36,7 +36,7 @@ export default function Header() {
         {/* 🧭 Навигация — ПК */}
         <nav className="hidden md:flex gap-6 items-center text-sm md:text-base">
           <Link href="/" className="hover:underline">Басты бет</Link>
-          <Link href="/topics" className="hover:underline">Тақырыптар</Link>
+          <Link href="/topics/page0" className="hover:underline">Тапсырмалар</Link>
 
           {!loading && !user && (
             <>
@@ -69,8 +69,8 @@ export default function Header() {
           <Link href="/" className="hover:underline" onClick={() => setMenuOpen(false)}>
             Басты бет
           </Link>
-          <Link href="/topics" className="hover:underline" onClick={() => setMenuOpen(false)}>
-            Тақырыптар
+          <Link href="/topics/page0" className="hover:underline" onClick={() => setMenuOpen(false)}>
+            Тапсырмалар
           </Link>
 
           {!loading && !user && (

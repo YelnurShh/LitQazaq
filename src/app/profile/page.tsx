@@ -9,7 +9,7 @@ import { doc, getDoc } from "firebase/firestore";
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [points, setPoints] = useState<number>(0);
+  const [completedTasks, setCompletedTasks] = useState<number>(0);
   const [fullName, setFullName] = useState<string>("");
   const [grade, setGrade] = useState<string>("");
   const router = useRouter();
@@ -21,12 +21,12 @@ export default function ProfilePage() {
       } else {
         setUser(currentUser);
 
-        // 🔹 Firestore-дан қосымша деректерді алу
+        // 🔹 Firestore-дан қолданушы деректерін алу
         const userRef = doc(db, "users", currentUser.uid);
         const snap = await getDoc(userRef);
         if (snap.exists()) {
           const data = snap.data();
-          setPoints(data.points || 0);
+          setCompletedTasks(data.completedTasks || 0); // ✅ Тапсырма саны
           setFullName(data.fullName || "Аты-жөні енгізілмеген");
           setGrade(data.grade || "Сынып көрсетілмеген");
         }
@@ -46,16 +46,16 @@ export default function ProfilePage() {
     return <p className="text-center mt-10">Жүктеліп жатыр...</p>;
   }
 
-  // 🔹 Ұпайға байланысты марапаттар
+  // 🔹 Марапат логикасы (тапсырма санына қарай)
   const getBadge = () => {
-    if (points >= 100) return "🏆 Алтын жеңімпаз";
-    if (points >= 50) return "🥈 Күміс белсенді";
-    if (points >= 20) return "🥉 Қола қатысушы";
-    return "🌱 Жаңадан бастаушы";
+    if (completedTasks >= 20) return "🏆 Алтын үздік";
+    if (completedTasks >= 10) return "🥈 Күміс орындаушы";
+    if (completedTasks >= 5) return "🥉 Белсенді қатысушы";
+    return "🌱 Бастапқы деңгей";
   };
 
   return (
-   <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-amber-100 via-orange-100 to-rose-100 text-gray-900 px-6">
+    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-amber-100 via-orange-100 to-rose-100 text-gray-900 px-6">
       <h1 className="text-4xl font-extrabold mb-8 text-amber-800 drop-shadow">
         Әдеби тұлға беті
       </h1>
@@ -71,10 +71,10 @@ export default function ProfilePage() {
             </p>
           </div>
 
-          {/* 🔹 Ұпай және марапат */}
+          {/* 🔹 Тапсырма саны және марапат */}
           <div className="mt-4 p-5 bg-amber-50 rounded-2xl shadow-inner">
             <p className="text-2xl font-extrabold text-amber-800">
-              ⭐Ұпай: {points} 
+              ✅ Орындаған тапсырмалар: {completedTasks}
             </p>
             <p className="mt-2 text-lg font-semibold italic">{getBadge()}</p>
           </div>

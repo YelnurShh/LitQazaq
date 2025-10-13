@@ -37,7 +37,7 @@ export default function HomePage() {
           Қазақ әдебиетін заманауи әдіспен үйрен!
         </h1>
         <p className="text-base sm:text-lg md:text-xl text-amber-800 max-w-2xl mb-6 md:mb-8">
-          Ақындар, жазушылар, шығармалар мен әдеби викториналар 🌿
+          Тапсырмалар орында, әдебиет әлемінде үздік бол!🌿
         </p>
 
         {/* 📖 Әдеби факт */}
@@ -49,10 +49,10 @@ export default function HomePage() {
         {/* 📚 Сабақтарға өту */}
         <section className="mt-6 md:mt-8">
           <Link
-            href="/topics"
+            href="/topics/page0"
             className="bg-yellow-300 text-rose-900 font-semibold px-5 md:px-6 py-3 rounded-xl shadow hover:bg-yellow-200 transition text-base md:text-lg"
           >
-            ✨ Сабақтарға өту
+            ✨ Тапсырмаларға өту
           </Link>
         </section>
       </div>
