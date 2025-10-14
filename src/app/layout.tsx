@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "LitQazaq",
+  title: "OQU.EDU",
   description: "Қазақ әдебиеті пәні бойынша білім беру платформасы",
 };
 

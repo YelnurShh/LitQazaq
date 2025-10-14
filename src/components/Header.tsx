@@ -27,7 +27,7 @@ export default function Header() {
     href="/"
     className="text-xl md:text-2xl font-bold hover:underline"
   >
-    📘LitQazaq
+    📘OQU.EDU
   </Link>
 </h1>
 
