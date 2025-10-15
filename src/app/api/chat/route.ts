@@ -8,8 +8,8 @@ export async function POST(req: Request) {
     }
 
     // 🗝️ Тікелей API кілттер
-    const GOOGLE_API_KEY = "AIzaSyXXXXXXX_YourGoogleKey"; // <-- өз Google Translate кілтіңді қой
-    const QROQ_API_KEY = "gsk_XXXXXXX_YourGroqKey"; // <-- өз Groq API кілтіңді қой
+    const GOOGLE_API_KEY = "AIzaSyAcutwUic07pBBNh3EMscMyxqSyTbrYuAc"; // <-- өз Google Translate кілтіңді қой
+    const QROQ_API_KEY = "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"; // <-- өз Groq API кілтіңді қой
 
     // 1️⃣ Қазақшадан ағылшыншаға аудару
     const translateToEng = await fetch(
