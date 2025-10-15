@@ -7,9 +7,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Хабарлама бос 😕" }, { status: 400 });
     }
 
-    // 1️⃣ Қазақшадан ағылшыншаға аудару (Google Translate)
+    // 🗝️ Тікелей API кілттер
+    const GOOGLE_API_KEY = "AIzaSyXXXXXXX_YourGoogleKey"; // <-- өз Google Translate кілтіңді қой
+    const QROQ_API_KEY = "gsk_XXXXXXX_YourGroqKey"; // <-- өз Groq API кілтіңді қой
+
+    // 1️⃣ Қазақшадан ағылшыншаға аудару
     const translateToEng = await fetch(
-      `https://translation.googleapis.com/language/translate/v2?key=${process.env.GOOGLE_API_KEY}`,
+      `https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -25,27 +29,26 @@ export async function POST(req: Request) {
     const englishMessage =
       engData?.data?.translations?.[0]?.translatedText || message;
 
-    // 2️⃣ Groq AI сұранысы (ағылшынша)
+    // 2️⃣ Groq AI сұранысы
     const qroqRes = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.QROQ_API_KEY}`,
+          Authorization: `Bearer ${QROQ_API_KEY}`,
         },
         body: JSON.stringify({
           model: "llama-3.1-8b-instant",
           messages: [
             {
               role: "system",
-              content:
-                `You are QazaqLiteratureAI — an expert assistant specializing in Kazakh literature, authors, poetry, and history.
-  Always answer in English. Focus on:
-  - classical and modern Kazakh writers (e.g., Abai, Mukhtar Auezov, Magzhan Zhumabayev)
-  - analysis of poems, novels, and literary movements
-  - cultural and historical background of Kazakh literature
-  Be accurate, polite, and educational.`,
+              content: `You are QazaqLiteratureAI — an expert assistant specialized in Kazakh literature, authors, poetry, and history.
+Always answer in English. Focus on:
+- classical and modern Kazakh writers (e.g., Abai, Mukhtar Auezov, Magzhan Zhumabayev)
+- analysis of poems, novels, and literary movements
+- cultural and historical background of Kazakh literature
+Be accurate, polite, and educational.`,
             },
             { role: "user", content: englishMessage },
           ],
@@ -65,9 +68,9 @@ export async function POST(req: Request) {
     const data = await qroqRes.json();
     const replyEng = data?.choices?.[0]?.message?.content || "No response";
 
-    // 3️⃣ Groq жауабын қазақшаға аудару
+    // 3️⃣ Қазақшаға аудару
     const translateToKaz = await fetch(
-      `https://translation.googleapis.com/language/translate/v2?key=${process.env.GOOGLE_API_KEY}`,
+      `https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
