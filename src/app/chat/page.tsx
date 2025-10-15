@@ -7,9 +7,31 @@ type Message = {
   content: string;
 };
 
+const qaPairs = [
+  {
+    question: "Абай Құнанбайұлы кім?",
+    answer:
+      "Абай Құнанбайұлы — қазақтың ұлы ақыны, философы және ағартушысы. Ол қазақ әдеби тілін дамытуға зор үлес қосып, өз шығармаларында адамгершілік, білім мен еңбектің маңызын дәріптеген.",
+  },
+  {
+    question: "«Қара сөздер» туралы айтып берші.",
+    answer:
+      "«Қара сөздер» — Абайдың философиялық еңбектері жинағы. Онда өмірдің мәні, адам болмысы, имандылық, білім, қоғам мәселелері терең талданады.",
+  },
+  {
+    question: "Мұхтар Әуезов кім?",
+    answer:
+      "Мұхтар Әуезов — қазақ әдебиетінің классигі, драматург, ғалым және қоғам қайраткері. Оның ең атақты туындысы — «Абай жолы» эпопеясы.",
+  },
+  {
+    question: "Магжан Жұмабаев туралы не білесің?",
+    answer:
+      "Мағжан Жұмабаев — қазақтың көрнекті ақыны, Алаш қозғалысының мүшесі. Оның поэзиясы сезімге, отаншылдыққа және рухани еркіндікке толы.",
+  },
+];
+
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
@@ -17,40 +39,17 @@ export default function ChatPage() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const sendMessage = async () => {
-    if (!input.trim()) return;
-    const userMessage: Message = { role: "user", content: input };
+  const handleQuestionClick = async (question: string, answer: string) => {
+    const userMessage: Message = { role: "user", content: question };
     setMessages((prev) => [...prev, userMessage]);
-    setInput("");
     setLoading(true);
 
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
-      });
-
-      const data = await res.json();
-      if (data.reply) {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: data.reply },
-        ]);
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: "Қате: жауап табылмады 😢" },
-        ]);
-      }
-    } catch (error) {
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: "Сервермен байланыс жоқ 😔" },
-      ]);
-    } finally {
+    // Имитация ЖИ ойлап жатқандай кідіріс жасаймыз ⏳
+    setTimeout(() => {
+      const aiMessage: Message = { role: "assistant", content: answer };
+      setMessages((prev) => [...prev, aiMessage]);
       setLoading(false);
-    }
+    }, 1500);
   };
 
   return (
@@ -59,6 +58,20 @@ export default function ChatPage() {
         💬 Қазақ әдебиеті — ЖИ көмекшісі
       </h1>
 
+      {/* 📚 Дайын сұрақтар */}
+      <div className="flex flex-wrap justify-center gap-2 px-4 mb-2">
+        {qaPairs.map((q, i) => (
+          <button
+            key={i}
+            onClick={() => handleQuestionClick(q.question, q.answer)}
+            className="px-4 py-2 bg-amber-200 hover:bg-amber-300 rounded-full text-sm md:text-base text-amber-900 font-medium shadow-sm transition"
+          >
+            {q.question}
+          </button>
+        ))}
+      </div>
+
+      {/* 💬 Чат аймағы */}
       <div className="flex-1 overflow-y-auto px-4 md:px-8 py-4 space-y-4">
         {messages.map((msg, i) => (
           <div
@@ -88,25 +101,6 @@ export default function ChatPage() {
         )}
 
         <div ref={chatEndRef} />
-      </div>
-
-      {/* 🔤 Төменгі енгізу жолағы */}
-      <div className="flex gap-2 p-4 md:p-6 border-t border-amber-200 bg-white/60 backdrop-blur-md">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-          placeholder="Сұрақ қойыңыз... (мысалы: «Абайдың қара сөздері туралы айтып берші»)"
-          className="flex-1 p-3 rounded-xl border border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400 text-gray-800"
-        />
-        <button
-          onClick={sendMessage}
-          disabled={loading}
-          className="px-5 py-3 bg-amber-400 hover:bg-amber-300 rounded-xl font-semibold text-amber-900 shadow-md transition"
-        >
-          Жіберу
-        </button>
       </div>
     </main>
   );
